@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <title>Alarm</title>
 </head>
 
 
@@ -17,9 +17,70 @@
 
 
 <script>
+  function hours(e) {
+      var t = new Date,
+          n = t.getHours(),
+          l = t.getMinutes();
+      t.getSeconds();
+      var u = document.getElementById("Minutes").value;
+      if (e <= n  && u < l) return document.getElementById("total").innerHTML = n  + ":" + l + " يجب ظبط المنبه ليعمل بعد الوقت الحالي";
+      res();
+      var t = new Date,
+          n = t.getHours(),
+          l = t.getMinutes();
+      t.getSeconds();
+      var r = document.getElementById("Hours").value,
+          u = document.getElementById("Minutes").value,
+          s = Math.abs(n  - r),
+          a = Math.abs(Math.abs(u) + Math.abs(60 - l));
+      if (0 == u || 0 == r) return document.getElementById("total").innerHTML = "يرجى إختيار الساعة والدقيقة";
+      if (0 == s && u <= l) return document.getElementById("total").innerHTML = n  + ":" + l + " يجب ظبط المنبه ليعمل بعد الوقت الحالي";
+      if (0 == s && u > l) return document.getElementById("total").innerHTML = " تم ظبط المنبه ليعمل بعد  0 من الساعات وبعد   " + Math.abs(u - l) + " من الدقائق";
+      if (r < n ) return document.getElementById("total").innerHTML = n - 1 + ":" + l + " يجب ظبط المنبه ليعمل بعد الوقت الحالي";
+      else if (u >= 1 && s >= 1) return a >= 60 ? document.getElementById("total").innerHTML = ` تم ظبط المنبه ليعمل بعد  ${s} من الساعات وبعد   ${a-60} من الدقائق` : document.getElementById("total").innerHTML = ` تم ظبط المنبه ليعمل بعد  ${s-1} من الساعات وبعد   ` + a + " من الدقائق"
+  }
 
-  function hours(e){var t=new Date,n=t.getHours(),l=t.getMinutes();t.getSeconds();var u=document.getElementById("Minutes").value;if(e<=n-1&&u<l)return document.getElementById("total").innerHTML=n-1+":"+l+" يجب ظبط المنبه ليعمل بعد الوقت الحالي";res();var t=new Date,n=t.getHours(),l=t.getMinutes();t.getSeconds();var r=document.getElementById("Hours").value,u=document.getElementById("Minutes").value,s=Math.abs(n-1-r),a=Math.abs(Math.abs(u)+Math.abs(60-l));if(0==u||0==r)return document.getElementById("total").innerHTML="يرجى إختيار الساعة والدقيقة";if(0==s&&u<=l)return document.getElementById("total").innerHTML=n-1+":"+l+" يجب ظبط المنبه ليعمل بعد الوقت الحالي";if(0==s&&u>l)return document.getElementById("total").innerHTML=" تم ظبط المنبه ليعمل بعد  0 من الساعات وبعد   "+Math.abs(u-l)+" من الدقائق";if(r<n-1)return document.getElementById("total").innerHTML=n-1+":"+l+" يجب ظبط المنبه ليعمل بعد الوقت الحالي";else if(u>=1&&s>=1)return a>=60?document.getElementById("total").innerHTML=` تم ظبط المنبه ليعمل بعد  ${s} من الساعات وبعد   ${a-60} من الدقائق`:document.getElementById("total").innerHTML=` تم ظبط المنبه ليعمل بعد  ${s-1} من الساعات وبعد   `+a+" من الدقائق"}function minutes(e){var t=document.getElementById("Hours").value,n=new Date,l=n.getHours(),u=n.getMinutes();if(n.getSeconds(),e<u&&t<=l-1)return document.getElementById("minutes_value").innerHTML=0,document.getElementById("total").innerHTML=l-1+":"+u+" يجب ظبط المنبه ليعمل بعد الوقت الحالي";var n=new Date,l=n.getHours(),u=n.getMinutes();n.getSeconds();var t=document.getElementById("Hours").value,r=document.getElementById("Minutes").value;document.getElementById("minutes_value").innerHTML=e,document.getElementById("minutes_value").innerHTML=r}function start(){var e=new Date;e.getHours(),e.getMinutes(),e.getSeconds(),document.getElementById("Hours").value,document.getElementById("Minutes").value,document.getElementById("total").innerHTML=hours()}function res(){var e=new Date,t=e.getHours(),n=e.getMinutes();e.getSeconds();var l=document.getElementById("Hours").value,u=document.getElementById("Minutes").value;result=(60*Math.abs(t-1-l)+1*Math.abs(n-u))*6e4,u==n&&l==t-1&&alarm()}function alarm(){document.getElementById("play").style.display="block",document.getElementById("myAudio").play()}function clo(e){e.style.display="none",document.getElementById("myAudio").pause(),document.getElementById("Hours").value=0,document.getElementById("Minutes").value=0}function save(){setInterval(start,1e3)}
+  function minutes(e) {
+      var t = document.getElementById("Hours").value,
+          n = new Date,
+          l = n.getHours(),
+          u = n.getMinutes();
+      if (n.getSeconds(), e < u && t <= l - 1) return document.getElementById("minutes_value").innerHTML = 0, document.getElementById("total").innerHTML = l - 1 + ":" + u + " يجب ظبط المنبه ليعمل بعد الوقت الحالي";
+      var n = new Date,
+          l = n.getHours(),
+          u = n.getMinutes();
+      n.getSeconds();
+      var t = document.getElementById("Hours").value,
+          r = document.getElementById("Minutes").value;
+      document.getElementById("minutes_value").innerHTML = e, document.getElementById("minutes_value").innerHTML = r
+  }
 
+  function start() {
+      var e = new Date;
+      e.getHours(), e.getMinutes(), e.getSeconds(), document.getElementById("Hours").value, document.getElementById("Minutes").value, document.getElementById("total").innerHTML = hours()
+  }
+
+  function res() {
+      var e = new Date,
+          t = e.getHours(),
+          n = e.getMinutes();
+      e.getSeconds();
+      var l = document.getElementById("Hours").value,
+          u = document.getElementById("Minutes").value;
+      result = (60 * Math.abs(t - 1 - l) + 1 * Math.abs(n - u)) * 6e4, u == n && l == t - 1 && alarm()
+  }
+
+  function alarm() {
+      document.getElementById("play").style.display = "block", document.getElementById("myAudio").play()
+  }
+
+  function clo(e) {
+      e.style.display = "none", document.getElementById("myAudio").pause(), document.getElementById("Hours").value = 0, document.getElementById("Minutes").value = 0
+  }
+
+  function save() {
+      setInterval(start, 1e3)
+  }
 </script>
 
 
