@@ -1,89 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clock</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      overflow: hidden;
+    
+    }
+
+    .clock {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 60%, #dbeafe 100%);
+      border: 12px solid rgba(255,255,255,0.2);
+      box-shadow:
+        0 0 30px rgba(0,0,0,0.5),
+        inset 0 0 20px rgba(255,255,255,0.6);
+    }
+
+    /* أرقام الساعة */
+    .number {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #0f172a;
+    }
+
+    .number span {
+      display: inline-block;
+      transform: translateY(12px);
+    }
+
+    .n1 { transform: rotate(30deg); }
+    .n1 span { transform: rotate(-30deg) translateY(12px); }
+
+    .n2 { transform: rotate(60deg); }
+    .n2 span { transform: rotate(-60deg) translateY(12px); }
+
+    .n3 { transform: rotate(90deg); }
+    .n3 span { transform: rotate(-90deg) translateY(12px); }
+
+    .n4 { transform: rotate(120deg); }
+    .n4 span { transform: rotate(-120deg) translateY(12px); }
+
+    .n5 { transform: rotate(150deg); }
+    .n5 span { transform: rotate(-150deg) translateY(12px); }
+
+    .n6 { transform: rotate(180deg); }
+    .n6 span { transform: rotate(-180deg) translateY(12px); }
+
+    .n7 { transform: rotate(210deg); }
+    .n7 span { transform: rotate(-210deg) translateY(12px); }
+
+    .n8 { transform: rotate(240deg); }
+    .n8 span { transform: rotate(-240deg) translateY(12px); }
+
+    .n9 { transform: rotate(270deg); }
+    .n9 span { transform: rotate(-270deg) translateY(12px); }
+
+    .n10 { transform: rotate(300deg); }
+    .n10 span { transform: rotate(-300deg) translateY(12px); }
+
+    .n11 { transform: rotate(330deg); }
+    .n11 span { transform: rotate(-330deg) translateY(12px); }
+
+    .n12 span {
+      transform: translateY(12px);
+    }
+
+    /* العلامات الصغيرة */
+   
+    /* العقارب */
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom;
+      transform: translateX(-50%) rotate(0deg);
+      border-radius: 10px;
+    }
+
+    .hour {
+      width: 10px;
+      height: 85px;
+      background: #111827;
+      z-index: 3;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+
+    .minute {
+      width: 6px;
+      height: 120px;
+      background: #2563eb;
+      z-index: 2;
+      box-shadow: 0 0 8px rgba(37,99,235,0.3);
+    }
+
+    .second {
+      width: 3px;
+      height: 140px;
+      background: #ef4444;
+      z-index: 1;
+      box-shadow: 0 0 12px rgba(239,68,68,0.6);
+    }
+
+    .center-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      background: #111827;
+      border: 4px solid white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    /* التاريخ */
+    .date-box {
+      position: absolute;
+      bottom: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+  </style>
 </head>
 <body>
-    <style>
-        body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.clock {
-  width: 300px;
-  height: 300px;
-  border: 10px solid white;
-  border-radius: 50%;
-  position: relative;
-  background-color: #ecf0f1;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
+  <div class="clock">
 
-.hand {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom; /* سر الحركة: الدوران من القاعدة */
-  transform: translateX(-50%) rotate(0deg);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
+    <!-- العلامات -->
+    <script>
+      for(let i = 0; i < 60; i++) {
+        const mark = document.createElement('div');
+        mark.classList.add('mark');
 
-.hour { width: 8px; height: 60px; background: black; z-index: 3; }
-.minute { width: 6px; height: 90px; background: #34495e; z-index: 2; }
-.second { width: 3px; height: 110px; background: #e74c3c; z-index: 1; }
+        if(i % 5 === 0) mark.classList.add('big');
 
-.center-dot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 15px;
-  height: 15px;
-  background: black;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-    </style>
-    <div class="clock">
-  <div class="hand hour" id="hour-hand"></div>
-  <div class="hand minute" id="minute-hand"></div>
-  <div class="hand second" id="second-hand"></div>
-  <div class="center-dot"></div>
-</div>
-<script>
+        mark.style.transform = `translateX(-50%) rotate(${i * 6}deg)`;
+        document.querySelector('.clock')?.appendChild(mark);
+      }
+    </script>
+
+    <!-- الأرقام -->
+    <div class="number n12"><span>12</span></div>
+    <div class="number n1"><span>1</span></div>
+    <div class="number n2"><span>2</span></div>
+    <div class="number n3"><span>3</span></div>
+    <div class="number n4"><span>4</span></div>
+    <div class="number n5"><span>5</span></div>
+    <div class="number n6"><span>6</span></div>
+    <div class="number n7"><span>7</span></div>
+    <div class="number n8"><span>8</span></div>
+    <div class="number n9"><span>9</span></div>
+    <div class="number n10"><span>10</span></div>
+    <div class="number n11"><span>11</span></div>
+
+    <!-- العقارب -->
+    <div class="hand hour" id="hour-hand"></div>
+    <div class="hand minute" id="minute-hand"></div>
+    <div class="hand second" id="second-hand"></div>
+
+    <div class="center-dot"></div>
+
+    <div class="date-box" id="date"></div>
+  </div>
+
+  <script>
+    const hourHand = document.getElementById('hour-hand');
+    const minuteHand = document.getElementById('minute-hand');
+    const secondHand = document.getElementById('second-hand');
+    const dateBox = document.getElementById('date');
+
     function updateClock() {
-  const now = new Date();
+      const now = new Date();
 
-  const seconds = now.getSeconds();
-  const minutes = now.getMinutes();
-  const hours = now.getHours();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
 
-  // حساب الزوايا
-  // كل ثانية = 6 درجات (360 تقسيم 60)
-  const secondsDegrees = (seconds / 60) * 360;
-  
-  // كل دقيقة = 6 درجات + حركة بسيطة بناءً على الثواني
-  const minutesDegrees = ((minutes / 60) * 360) + ((seconds / 60) * 6);
-  
-  // كل ساعة = 30 درجة (360 تقسيم 12) + حركة بناءً على الدقائق
-  const hoursDegrees = ((hours % 12) / 12 * 360) + ((minutes / 60) * 30);
+      // زوايا العقارب
+      const secondDeg = seconds * 6;
+      const minuteDeg = minutes * 6 + seconds * 0.1;
+      const hourDeg = (hours % 12) * 30 + minutes * 0.5;
 
-  // تطبيق الدوران على العقارب
-  document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${secondsDegrees}deg)`;
-  document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${minutesDegrees}deg)`;
-  document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hoursDegrees}deg)`;
-}
+      hourHand.style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+      minuteHand.style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+      secondHand.style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
 
-// تشغيل الدالة كل ثانية
-setInterval(updateClock, 1000);
+      // التاريخ
+      const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+      const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
-// تشغيلها فوراً عند تحميل الصفحة
-updateClock();
-</script>
+      const day = days[now.getDay()];
+      const month = months[now.getMonth()];
+
+      dateBox.textContent = `${day} - ${now.getDate()} ${month}`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
 </body>
 </html>
