@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
 <link rel="icon" href="./alarm.gif">
 
 <style>
+
 body{
-    background-image:linear-gradient(180deg,#2f3d96 ,#1d9e73);
+    background-image:linear-gradient(180deg,#2f3d96,#1d9e73);
     font-family:Arial;
     height:100vh;
     overflow:hidden;
@@ -20,7 +22,7 @@ body{
 
 .container{
     text-align:center;
-    padding-top:30px
+    padding-top:30px;
 }
 
 #Hours,
@@ -38,24 +40,22 @@ body{
     font-size:16px;
     margin:5px;
     direction:rtl;
-    text-align:center
+    text-align:center;
 }
 
 option{
     background:rgba(0,0,0,.1);
     color:#444;
-    border-radius:999px;
-    padding:4px;
 }
 
 .total{
     color:#fff;
     font-weight:700;
-    font-size:25px
+    font-size:25px;
 }
 
 .save{
-    background: linear-gradient(to top,#2f3d962c);
+    background:linear-gradient(to top,#2f3d962c);
     backdrop-filter:blur(20px);
     color:#fff;
     border-radius:999px;
@@ -67,11 +67,11 @@ option{
     font-weight:700;
     font-size:20px;
     margin:15px 5px 1px 5px;
-    box-shadow:inset 0 0 20px #eeeeee8c
+    box-shadow:inset 0 0 20px #eeeeee8c;
 }
 
 .save:hover{
-    box-shadow:0 0 30px #fff
+    box-shadow:0 0 30px #fff;
 }
 
 #play{
@@ -83,12 +83,11 @@ option{
     position:absolute;
     top:0;
     display:none;
-    z-index:10
+    z-index:10;
 }
 
 .close{
     background:#e4030348;
-    backdrop-filter:blur(20px);
     color:#fff;
     border-radius:999px;
     padding:10px;
@@ -100,8 +99,7 @@ option{
 }
 
 .sno{
-    background:rgba(8, 12, 84, 0.438);
-    backdrop-filter:blur(20px);
+    background:rgba(8,12,84,.438);
     color:#fff;
     border-radius:999px;
     padding:10px;
@@ -111,12 +109,14 @@ option{
     font-size:18px;
     margin:10px;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- شاشة تشغيل المنبه -->
+<!-- شاشة المنبه -->
+
 <div id="play">
 
     <img src="./alarm.gif"
@@ -127,6 +127,7 @@ option{
     </audio>
 
     <div>
+
         <button onclick="clo()" class="close">
             إغلاق المنبه
         </button>
@@ -134,11 +135,13 @@ option{
         <button onclick="sno()" class="sno">
             غفوة خمس دقائق
         </button>
+
     </div>
 
 </div>
 
 <!-- المحتوى -->
+
 <div class="container">
 
     <iframe src="./clock.html"
@@ -150,21 +153,26 @@ option{
 
     <br><br>
 
-    <!-- اختيار الوقت -->
     <form style="display:flex;justify-content:center">
 
         <!-- الدقائق -->
+
         <select id="Minutes">
+
             <option value="0" selected disabled>
                 اختر الدقيقة :
             </option>
+
         </select>
 
         <!-- الساعات -->
+
         <select id="Hours">
+
             <option value="0" selected disabled>
                 اختر الساعة :
             </option>
+
         </select>
 
     </form>
@@ -178,6 +186,7 @@ option{
 </div>
 
 <!-- المطور -->
+
 <div style="
 z-index:1000;
 position:absolute;
@@ -185,18 +194,26 @@ bottom:0;
 text-align:center;
 width:100%;
 ">
+
 <h4 style="color:#fff">
+
 Developed By
+
 <a href="https://abdallahweb.github.io/resume/"
    style="color:#fff">
+
 Abdallah Fouad
+
 </a>
+
 </h4>
+
 </div>
-<script src="query.js"></script>
+
 <script>
 
 /* تعبئة الساعات */
+
 for(let i = 1; i <= 24; i++){
 
     document.getElementById("Hours").innerHTML +=
@@ -204,6 +221,7 @@ for(let i = 1; i <= 24; i++){
 }
 
 /* تعبئة الدقائق */
+
 for(let i = 0; i <= 59; i++){
 
     document.getElementById("Minutes").innerHTML +=
@@ -213,9 +231,11 @@ for(let i = 0; i <= 59; i++){
 let alarmInterval = null;
 
 /* حفظ المنبه */
+
 function save(){
 
     if(alarmInterval !== null){
+
         clearInterval(alarmInterval);
     }
 
@@ -226,11 +246,13 @@ function save(){
 }
 
 /* فحص الوقت */
+
 function checkAlarm(){
 
     const now = new Date();
 
     const currentHours = now.getHours();
+
     const currentMinutes = now.getMinutes();
 
     const alarmHours =
@@ -252,6 +274,7 @@ function checkAlarm(){
 }
 
 /* إغلاق المنبه */
+
 function clo(){
 
     document.getElementById("play").style.display =
@@ -262,7 +285,8 @@ function clo(){
     document.getElementById("myAudio").currentTime = 0;
 }
 
-/* غفوة 5 دقائق */
+/* غفوة */
+
 function sno(){
 
     const now = new Date();
@@ -281,44 +305,66 @@ function sno(){
     "تم تأجيل المنبه 5 دقائق";
 }
 
-</script>
+/* ========================================= */
+/* منع الكليك يمين والاختصارات */
+/* ========================================= */
 
-    <script>
-    document.onkeydown = function (e) {
-    if (
-        e.ctrlKey &&
-        (
-            e.keyCode === 67 ||
-            e.keyCode === 86 ||
-            e.keyCode === 85 ||
-            e.keyCode === 117
-        )
-    ) {
-        return false;
-    } else {
-        return true;
-    }
-};
+/* منع الكليك يمين */
 
-$(document).keypress("u", function (e) {
-    if (e.ctrlKey) {
-        return false;
-    } else {
-        return true;
-    }
-});
+document.addEventListener("contextmenu", function(e){
 
-document.addEventListener("contextmenu", function (e) {
     e.preventDefault();
-}, false);
 
-$(document).keydown(function (event) {
-    if (event.keyCode == 123) {
-        return false;
-    } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-        return false;
-    }
 });
+
+/* منع الاختصارات */
+
+document.addEventListener("keydown", function(e){
+
+    // F12
+    if(e.key === "F12"){
+
+        e.preventDefault();
+    }
+
+    // Ctrl + U
+    if(e.ctrlKey && e.key.toLowerCase() === "u"){
+
+        e.preventDefault();
+    }
+
+    // Ctrl + Shift + I
+    if(
+        e.ctrlKey &&
+        e.shiftKey &&
+        e.key.toLowerCase() === "i"
+    ){
+
+        e.preventDefault();
+    }
+
+    // Ctrl + Shift + J
+    if(
+        e.ctrlKey &&
+        e.shiftKey &&
+        e.key.toLowerCase() === "j"
+    ){
+
+        e.preventDefault();
+    }
+
+    // Ctrl + Shift + C
+    if(
+        e.ctrlKey &&
+        e.shiftKey &&
+        e.key.toLowerCase() === "c"
+    ){
+
+        e.preventDefault();
+    }
+
+});
+
 </script>
 
 </body>
