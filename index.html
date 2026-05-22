@@ -286,52 +286,82 @@ function sno(){
 /* ========================================= */
 
 /* منع الكليك يمين */
-document.addEventListener("contextmenu", function(e){
-    e.preventDefault();
-});
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* منع التحديد */
+document.onselectstart = () => false;
+
+/* منع السحب */
+document.ondragstart = () => false;
 
 /* منع الاختصارات */
-document.addEventListener("keydown", function(e){
+document.addEventListener("keydown", function(e) {
 
     // F12
-    if(e.key === "F12"){
+    if (e.keyCode == 123) {
         e.preventDefault();
+        return false;
     }
 
-    // Ctrl + U
-    if(e.ctrlKey && e.key.toLowerCase() === "u"){
+    // Ctrl+U
+    if (e.ctrlKey && e.key.toLowerCase() == "u") {
         e.preventDefault();
+        return false;
     }
 
-    // Ctrl + Shift + I
-    if(
-        e.ctrlKey &&
-        e.shiftKey &&
-        e.key.toLowerCase() === "i"
-    ){
+    // Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() == "i") {
         e.preventDefault();
+        return false;
     }
 
-    // Ctrl + Shift + J
-    if(
-        e.ctrlKey &&
-        e.shiftKey &&
-        e.key.toLowerCase() === "j"
-    ){
+    // Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() == "j") {
         e.preventDefault();
+        return false;
     }
 
-    // Ctrl + Shift + C
-    if(
-        e.ctrlKey &&
-        e.shiftKey &&
-        e.key.toLowerCase() === "c"
-    ){
+    // Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() == "c") {
         e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+S
+    if (e.ctrlKey && e.key.toLowerCase() == "s") {
+        e.preventDefault();
+        return false;
     }
 
 });
 
+/* كشف فتح Developer Tools */
+setInterval(function () {
+
+    let before = new Date().getTime();
+
+    debugger;
+
+    let after = new Date().getTime();
+
+    if (after - before > 100) {
+
+        document.body.innerHTML = `
+        <div style="
+            background:black;
+            color:red;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:40px;
+            font-family:Arial;
+        ">
+            Developer Tools ممنوعة
+        </div>`;
+    }
+
+}, 1000);
 </script>
 
 </body>
