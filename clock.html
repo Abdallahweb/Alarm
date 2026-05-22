@@ -232,5 +232,42 @@
     setInterval(updateClock, 1000);
   </script>
 
+<script src="./query.js"></script>
+<script>
+// منع القائمة اليمنى (كليك يمين)
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// منع اختصارات الكيبورد
+document.addEventListener('keydown', function(e) {
+    
+    // 1. منع F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+
+    // 2. منع Ctrl+Shift+I (أدوات المطورين) و Ctrl+Shift+J (الكونسول) و Ctrl+Shift+C (الفحص)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+        e.preventDefault();
+        return false;
+    }
+
+    // 3. منع Ctrl+U (عرض السورس كود)
+    if (e.ctrlKey && (e.keyCode === 85 || e.key === 'u')) {
+        e.preventDefault();
+        return false;
+    }
+
+    // 4. منع Ctrl+C (النسخ) و Ctrl+V (اللصق) و Ctrl+X (القص)
+    if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 88)) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+
+
 </body>
 </html>
