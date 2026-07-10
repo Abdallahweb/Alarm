@@ -107,7 +107,7 @@ justify-content: space-between;
 
 }
 .close {
-background: #460303b9;
+background: #aa000049;
 backdrop-filter: blur(20px);
 color: #fff;
 border-radius: 999px;
@@ -124,7 +124,7 @@ text-align: center;
 }
 
 .sno {
-background: rgba(8, 12, 84, 0.438);
+background: rgba(1, 8, 150, 0.089);
 backdrop-filter: blur(20px);
 color: #fff;
 border-radius: 999px;
