@@ -92,17 +92,27 @@ option {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-.close {
-  position: absolute;
+.close_sno{
+      position: absolute;
+      
   bottom: 200px;
+  left:50%;
+width:500px;
+      margin-left: -250px;
+          display: flex;
+          gap: 10px;
+    justify-content: space-between;
+
+
+}
+.close {
   background: #460303b9;
   backdrop-filter: blur(20px);
   color: #fff;
   border-radius: 999px;
-  padding:7px 4px;
+  padding:7px 6px;
   border:none;
-  box-shadow: inset 0 0 10px #ffffff83;
+  box-shadow: inset 0 0 13px #ffffff83;
   width: 300px;
   outline: 0;
   cursor: pointer;
@@ -110,20 +120,17 @@ option {
   font-size: 16px;
   direction: rtl;
   text-align: center;
-  margin: auto
 }
 
 .sno {
-  position: absolute;
-  bottom: 200px;
   background: rgba(8, 12, 84, 0.438);
   backdrop-filter: blur(20px);
   color: #fff;
   border-radius: 999px;
   padding: 4px;
-  padding:7px 4px;
+  padding:7px 6px;
   border:none;
-  box-shadow: inset 0 0 10px #ffffff83;
+  box-shadow: inset 0 0 13px #ffffff83;
   width: 300px;
   outline: 0;
   cursor: pointer;
@@ -131,5 +138,10 @@ option {
   font-size: 16px;
   direction: rtl;
   text-align: center;
-  margin: auto
+}
+.close:hover{
+    transform: scale(1.05);
+}
+.sno:hover{
+    transform: scale(1.05);
 }
