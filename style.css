@@ -78,23 +78,19 @@ box-shadow: 0 0 30px #fff
 #play {
 
 position: relative;
-width: auto;
-height: calc(100vh + 100px);
-backdrop-filter: blur(20px);
-text-align: center;
-cursor: pointer;
-z-index: 0;
-display: none;
-text-align: center;
-margin: auto;
-background-image: url(./alarm.gif);
+background-image: linear-gradient(to bottom, transparent, 90%, #04000f), url(./alarm.gif); 
 background-position: center;
 background-size: cover;
 background-repeat: no-repeat;
-}
+height: calc(100vh + 100px);
+backdrop-filter: blur(20px);
+text-align: center;
+z-index: 0;
+display: none;
+text-align: center;
+margin: auto;}
 .close_sno{
 position: absolute;
-
 bottom: 200px;
 left:50%;
 width:500px;
