@@ -36,6 +36,7 @@
         inset 0 0 60px rgba(255, 255, 255, 0.404);
     }
 
+    /* أرقام الساعة */
     .number {
       position: absolute;
       width: 100%;
@@ -88,7 +89,9 @@
       transform: translateY(12px);
     }
 
+    /* العلامات الصغيرة */
    
+    /* العقارب */
     .hand {
       position: absolute;
       bottom: 50%;
@@ -101,25 +104,25 @@
     .hour {
       width: 10px;
       height: 85px;
-      background: #002983;
+      background:  silver;
       z-index: 3;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      box-shadow: 0 0 4px silver;
     }
 
     .minute {
       width: 6px;
       height: 120px;
-      background: #0138b1;
+      background: #eee;
       z-index: 2;
-      box-shadow: 0 0 8px rgba(37,99,235,0.3);
+      box-shadow: 0 0 4px #eee;
     }
 
     .second {
       width: 3px;
       height: 140px;
-      background: #0140c9;
+      background: #fff;
       z-index: 1;
-      box-shadow: 0 0 2px #0138b1;
+      box-shadow: 0 0 2px #fff;
     }
 
     .center-dot {
@@ -136,6 +139,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
+    /* التاريخ */
     .date-box {
 position: absolute;
       bottom: 70px;
@@ -157,6 +161,7 @@ position: absolute;
 
   <div class="clock">
 
+    <!-- العلامات -->
     <script>
       for(let i = 0; i < 60; i++) {
         const mark = document.createElement('div');
@@ -169,6 +174,7 @@ position: absolute;
       }
     </script>
 
+    <!-- الأرقام -->
     <div class="number n12"><span>12</span></div>
     <div class="number n1"><span>1</span></div>
     <div class="number n2"><span>2</span></div>
@@ -182,6 +188,7 @@ position: absolute;
     <div class="number n10"><span>10</span></div>
     <div class="number n11"><span>11</span></div>
 
+    <!-- العقارب -->
     <div class="hand hour" id="hour-hand"></div>
     <div class="hand minute" id="minute-hand"></div>
     <div class="hand second" id="second-hand"></div>
@@ -204,6 +211,7 @@ position: absolute;
       const minutes = now.getMinutes();
       const hours = now.getHours();
 
+      // زوايا العقارب
       const secondDeg = seconds * 6;
       const minuteDeg = minutes * 6 + seconds * 0.1;
       const hourDeg = (hours % 12) * 30 + minutes * 0.5;
@@ -212,6 +220,7 @@ position: absolute;
       minuteHand.style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
       secondHand.style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
 
+      // التاريخ
       const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
       const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
@@ -227,26 +236,33 @@ position: absolute;
 
 <script src="./query.js"></script>
 <script>
+// منع القائمة اليمنى (كليك يمين)
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
 
+// منع اختصارات الكيبورد
 document.addEventListener('keydown', function(e) {
     
+    // 1. منع F12
     if (e.key === 'F12' || e.keyCode === 123) {
         e.preventDefault();
         return false;
     }
 
+    // 2. منع Ctrl+Shift+I (أدوات المطورين) و Ctrl+Shift+J (الكونسول) و Ctrl+Shift+C (الفحص)
     if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
         e.preventDefault();
         return false;
     }
 
+    // 3. منع Ctrl+U (عرض السورس كود)
     if (e.ctrlKey && (e.keyCode === 85 || e.key === 'u')) {
         e.preventDefault();
         return false;
     }
+
+    // 4. منع Ctrl+C (النسخ) و Ctrl+V (اللصق) و Ctrl+X (القص)
     if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 88)) {
         e.preventDefault();
         return false;
